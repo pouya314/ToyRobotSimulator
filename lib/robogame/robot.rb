@@ -1,0 +1,31 @@
+module Robogame
+  class Robot
+    attr_accessor :x, :y, :f
+    
+    def initialize
+      @x = nil
+      @y = nil
+      @f = nil
+    end
+    
+    def move
+      
+    end
+    
+    def turn_left
+      
+    end
+    
+    def turn_right
+      
+    end
+    
+    def get_position
+      {
+        :x => @x,
+        :y => @y,
+        :f => @f
+      }
+    end
+  end
+end
