@@ -1,0 +1,4 @@
+require 'robogame/runner'
+
+runner = Robogame::Runner.new
+runner.run
