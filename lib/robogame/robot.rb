@@ -30,6 +30,16 @@ module Robogame
     def move
       raise RobotNotOnTableException.new("Robot not placed on the table yet!") unless already_placed_on_table?
       
+      case @f
+      when :NORTH
+          move_to(@x,@y+1)
+      when :SOUTH
+          move_to(@x,@y-1)
+      when :WEST
+          move_to(@x-1,@y)
+      when :EAST
+          move_to(@x+1,@y)
+      end
     end
     
     def turn_left
@@ -44,7 +54,7 @@ module Robogame
     
     def announce_position
       raise RobotNotOnTableException.new("Robot not placed on the table yet!") unless already_placed_on_table?
-      
+
       {
         :x => @x,
         :y => @y,
@@ -59,6 +69,13 @@ module Robogame
       
       def already_placed_on_table?
         @table == nil ? false : true
+      end
+      
+      def move_to(target_x, target_y)
+        raise InvalidCoordinatesException.new("Out of Boundry movement is not allowed!") unless @table.coordinates_valid?(target_x,target_y)
+        
+        @x = target_x
+        @y = target_y
       end
   end
 end
