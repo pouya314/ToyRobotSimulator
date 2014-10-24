@@ -12,7 +12,7 @@ module Robogame
       prompt = '> '
       puts prompt
 
-      while command = STDIN.gets.chomp!.upcase
+      while command = STDIN.gets.chomp.strip.upcase
         break if command == 'QUIT'
         
         begin
