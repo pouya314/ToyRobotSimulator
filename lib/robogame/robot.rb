@@ -1,3 +1,6 @@
+require_relative 'wrong_facing_direction_exception'
+require_relative 'invalid_coordinates_exception'
+
 module Robogame
   class Robot
     attr_accessor :x, :y, :f
