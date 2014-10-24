@@ -3,7 +3,8 @@ require_relative 'invalid_coordinates_exception'
 
 module Robogame
   class Robot
-    attr_accessor :x, :y, :f
+    attr_accessor :x, :y, :f, :table
+    
     ALLOWED_FACING_DIRECTIONS = [:NORTH, :SOUTH, :EAST, :WEST]
     
     def initialize
