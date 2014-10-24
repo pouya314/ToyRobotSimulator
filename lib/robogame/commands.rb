@@ -14,20 +14,17 @@ module Robogame
     end
     
     def execute(command)
-      raise EmptyCommandException.new("The command you provided is empty!") if command.strip.empty?
+      raise EmptyCommandException.new("The command you provided is empty!") if command.empty?
 
       (function, arguments) = command.split(' ',2)
       
       case function
       when "PLACE"
-        tokens = arguments.split(",")
-        unless tokens.size == 3
+        if arguments.nil? || arguments.empty? || arguments.split(",").size != 3
           raise WrongNumberOfArgumentsForPlaceException.new("Wrong number of arguments given for PLACE command.")
         end
-        unless [:NORTH, :SOUTH, :EAST, :WEST].include?(tokens.last.to_sym)
-          raise WrongFacingDirectionException.new("Wrong Facing Direction Given for PLACE command.")
-        end
         
+        tokens = arguments.split(",")
         place(tokens[0].to_i, tokens[1].to_i, tokens[2].to_sym)
       when "MOVE"
         move
