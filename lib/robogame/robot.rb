@@ -49,5 +49,10 @@ module Robogame
         :f => @f
       }
     end
+    
+    protected
+      def facing_direction_valid?(f)
+        ALLOWED_FACING_DIRECTIONS.include?(f) ? true : false
+      end
   end
 end
