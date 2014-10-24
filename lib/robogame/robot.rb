@@ -42,7 +42,7 @@ module Robogame
       
     end
     
-    def get_position
+    def announce_position
       {
         :x => @x,
         :y => @y,
