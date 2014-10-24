@@ -39,24 +39,26 @@ module Robogame
       end
     end
     
-    def place(x, y, f)
-      
-    end
+    protected
+      def place(x, y, f)
+        @robot.sit_on_table(@table, x, y, f)
+      end
     
-    def move
-      
-    end
+      def move
+        @robot.move
+      end
     
-    def left
-      
-    end
+      def left
+        @robot.turn_left
+      end
     
-    def right
-      
-    end
+      def right
+        @robot.turn_right
+      end
     
-    def report
-      
-    end
+      def report
+        position = @robot.announce_position
+        "Output: #{position[:x]},#{position[:y]},#{position[:f].to_s}"
+      end
   end
 end
