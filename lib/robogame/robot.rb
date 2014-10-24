@@ -44,7 +44,8 @@ module Robogame
     
     def turn_left
       raise RobotNotOnTableException.new("Robot not placed on the table yet!") unless already_placed_on_table?
-      
+      curr_index = ALLOWED_FACING_DIRECTIONS.index(@f)
+      @f = (curr_index == 0 ? ALLOWED_FACING_DIRECTIONS[-1] : ALLOWED_FACING_DIRECTIONS[curr_index-1])
     end
     
     def turn_right
