@@ -2,10 +2,6 @@ require_relative "commands"
 
 module Robogame
   class Runner
-    # def initialize
-    #   
-    # end
-    
     def run
       command_centre = Commands.new
 
