@@ -6,7 +6,7 @@ module Robogame
   class Robot
     attr_accessor :x, :y, :f, :table
     
-    ALLOWED_FACING_DIRECTIONS = [:NORTH, :SOUTH, :EAST, :WEST]
+    ALLOWED_FACING_DIRECTIONS = [:NORTH, :EAST, :SOUTH, :WEST]
     
     def initialize
       @x = nil
