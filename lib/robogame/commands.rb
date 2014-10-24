@@ -4,7 +4,6 @@ require_relative 'robot'
 require_relative 'empty_command_exception'
 require_relative 'invalid_command_exception'
 require_relative 'wrong_number_of_arguments_for_place_exception'
-require_relative 'wrong_facing_direction_exception'
 
 
 module Robogame
