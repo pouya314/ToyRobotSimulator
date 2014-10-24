@@ -11,6 +11,7 @@ module Robogame
       @x = nil
       @y = nil
       @f = nil
+      @table = nil
     end
     
     def move
