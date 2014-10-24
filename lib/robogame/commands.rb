@@ -1,7 +1,10 @@
 require_relative 'table'
 require_relative 'robot'
+
 require_relative 'empty_command_exception'
 require_relative 'invalid_command_exception'
+require_relative 'wrong_number_of_arguments_for_place_exception'
+require_relative 'wrong_facing_direction_exception'
 
 
 module Robogame
@@ -18,7 +21,15 @@ module Robogame
       
       case function
       when "PLACE"
-        place(arguments)
+        tokens = arguments.split(",")
+        unless tokens.size == 3
+          raise WrongNumberOfArgumentsForPlaceException.new("Wrong number of arguments given for PLACE command.")
+        end
+        unless [:NORTH, :SOUTH, :EAST, :WEST].include?(tokens.last.to_sym)
+          raise WrongFacingDirectionException.new("Wrong Facing Direction Given for PLACE command.")
+        end
+        
+        place(tokens[0].to_i, tokens[1].to_i, tokens[2].to_sym)
       when "MOVE"
         move
       when "LEFT"
@@ -30,6 +41,26 @@ module Robogame
       else
         raise InvalidCommandException.new("The command you provided is invalid!")
       end
+    end
+    
+    def place(x, y, f)
+      
+    end
+    
+    def move
+      
+    end
+    
+    def left
+      
+    end
+    
+    def right
+      
+    end
+    
+    def report
+      
     end
   end
 end
