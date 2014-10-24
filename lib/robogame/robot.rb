@@ -1,5 +1,6 @@
 require_relative 'wrong_facing_direction_exception'
 require_relative 'invalid_coordinates_exception'
+require_relative 'robot_not_on_table_exception'
 
 module Robogame
   class Robot
@@ -27,18 +28,23 @@ module Robogame
     
     
     def move
+      raise RobotNotOnTableException.new("Robot not placed on the table yet!") unless already_placed_on_table?
       
     end
     
     def turn_left
+      raise RobotNotOnTableException.new("Robot not placed on the table yet!") unless already_placed_on_table?
       
     end
     
     def turn_right
+      raise RobotNotOnTableException.new("Robot not placed on the table yet!") unless already_placed_on_table?
       
     end
     
     def announce_position
+      raise RobotNotOnTableException.new("Robot not placed on the table yet!") unless already_placed_on_table?
+      
       {
         :x => @x,
         :y => @y,
