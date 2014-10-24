@@ -22,7 +22,6 @@ module Robogame
       @y = y
       @f = f
       @table = table
-      "Robot Placed On Table Successfully"
     end
     
     def move
