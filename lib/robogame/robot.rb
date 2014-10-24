@@ -18,14 +18,12 @@ module Robogame
     def sit_on_table(table, x, y, f)
       raise InvalidCoordinatesException.new("Invalid Coordinates!") unless table.coordinates_valid?(x,y)
       raise WrongFacingDirectionException.new("Wrong Facing Direction Given for PLACE command.") unless facing_direction_valid?(f)
-      
       @x = x
       @y = y
       @f = f
       @table = table
       "Robot Placed On Table Successfully"
     end
-    
     
     def move
       raise RobotNotOnTableException.new("Robot not placed on the table yet!") unless already_placed_on_table?
@@ -56,7 +54,6 @@ module Robogame
     
     def announce_position
       raise RobotNotOnTableException.new("Robot not placed on the table yet!") unless already_placed_on_table?
-
       {
         :x => @x,
         :y => @y,
@@ -75,7 +72,6 @@ module Robogame
       
       def move_to(target_x, target_y)
         raise InvalidCoordinatesException.new("Out of Boundry movement is not allowed!") unless @table.coordinates_valid?(target_x,target_y)
-        
         @x = target_x
         @y = target_y
       end
