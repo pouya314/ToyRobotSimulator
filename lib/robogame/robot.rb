@@ -14,6 +14,10 @@ module Robogame
       @table = nil
     end
     
+    def already_placed_on_table?
+      @table == nil ? false : true
+    end
+    
     def sit_on_table(table, x, y, f)
       raise InvalidCoordinatesException.new("Invalid Coordinates!") if not table.coordinates_valid?(x,y)
       raise WrongFacingDirectionException.new("Wrong Facing Direction Given for PLACE command.") if not facing_direction_valid?(f)
