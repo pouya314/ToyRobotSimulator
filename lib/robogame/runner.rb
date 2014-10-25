@@ -9,7 +9,8 @@ module Robogame
       while command = gets.chomp.strip.upcase
         break if command == 'QUIT'
         begin
-          command_centre.execute(command)
+          res = command_centre.execute(command)
+          puts res if res
         rescue Exception => e
           puts "#{e.class}: #{e.message}"
         end
