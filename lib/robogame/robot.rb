@@ -9,19 +9,20 @@ module Robogame
     ALLOWED_FACING_DIRECTIONS = [:NORTH, :EAST, :SOUTH, :WEST]
     
     def initialize
-      @x = nil
-      @y = nil
-      @f = nil
+      @x     = nil
+      @y     = nil
+      @f     = nil
       @table = nil
     end
     
     def sit_on_table(table, x, y, f)
       raise InvalidCoordinatesException.new("Invalid Coordinates!") unless table.coordinates_valid?(x,y)
       raise WrongFacingDirectionException.new("Wrong Facing Direction Given for PLACE command.") unless facing_direction_valid?(f)
-      @x = x
-      @y = y
-      @f = f
+      @x     = x
+      @y     = y
+      @f     = f
       @table = table
+      "ok"
     end
     
     def move
