@@ -1,5 +1,8 @@
 module Robogame
   class Table
+    
+    attr_accessor :min_x, :min_y, :max_x, :max_y
+    
     def initialize(max_x, max_y)
       @min_x = 0
       @min_y = 0
