@@ -58,7 +58,7 @@ module Robogame
     
       def report
         position = @robot.announce_position
-        puts "Output: #{position[:x]},#{position[:y]},#{position[:f].to_s}"
+        "#{position[:x]},#{position[:y]},#{position[:f].to_s}"
       end
   end
 end
