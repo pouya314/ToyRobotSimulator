@@ -15,7 +15,7 @@ module Robogame
           res = command_centre.execute(command)
           puts res if res
         rescue Exception => e
-          puts "#{e.class}: #{e.message}"
+          puts "Error: #{e.message}"
         end
         puts prompt
       end
