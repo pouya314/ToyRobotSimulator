@@ -1,0 +1,2 @@
+TABLE_MAX_X = 5
+TABLE_MAX_Y = 5
