@@ -56,11 +56,7 @@ module Robogame
     
     def announce_position
       raise RobotNotOnTableException.new("Robot not placed on the table yet!") unless already_placed_on_table?
-      {
-        :x => @x,
-        :y => @y,
-        :f => @f
-      }
+      "#{@x},#{@y},#{@f}"
     end
     
     protected

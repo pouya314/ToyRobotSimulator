@@ -57,8 +57,7 @@ module Robogame
       end
     
       def report
-        position = @robot.announce_position
-        "#{position[:x]},#{position[:y]},#{position[:f].to_s}"
+        @robot.announce_position
       end
   end
 end
