@@ -8,9 +8,9 @@ require_relative 'wrong_number_of_arguments_for_place_exception'
 
 module Robogame
   class Commands
-    def initialize
-      @table = Table.new(5,5)
-      @robot = Robot.new
+    def initialize(table, robot)
+      @table = table
+      @robot = robot
     end
     
     def execute(command)
