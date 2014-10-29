@@ -1,6 +1,4 @@
-require_relative 'wrong_facing_direction_exception'
-require_relative 'invalid_coordinates_exception'
-require_relative 'robot_not_on_table_exception'
+require_relative 'errors'
 
 module Robogame
   class Robot
@@ -16,8 +14,8 @@ module Robogame
     end
     
     def sit_on_table(table, x, y, f)
-      raise InvalidCoordinatesException.new("Invalid Coordinates!") unless table.coordinates_valid?(x,y)
-      raise WrongFacingDirectionException.new("Wrong Facing Direction Given for PLACE command.") unless facing_direction_valid?(f)
+      table.check_coordinates(x,y)
+      raise InvalidRobotDirection, "Wrong Facing Direction Given for PLACE command." unless facing_direction_valid?(f)
       @x     = x
       @y     = y
       @f     = f
@@ -26,7 +24,7 @@ module Robogame
     end
     
     def move
-      raise RobotNotOnTableException.new("Robot not placed on the table yet!") unless already_placed_on_table?
+      raise RobotNotPlaced, "Robot not placed on the table yet!" unless already_placed_on_table?
       
       case @f
       when :NORTH
@@ -41,21 +39,21 @@ module Robogame
     end
     
     def turn_left
-      raise RobotNotOnTableException.new("Robot not placed on the table yet!") unless already_placed_on_table?
+      raise RobotNotPlaced, "Robot not placed on the table yet!" unless already_placed_on_table?
       curr_index = ALLOWED_FACING_DIRECTIONS.index(@f)
       @f = (curr_index == 0 ? ALLOWED_FACING_DIRECTIONS[-1] : ALLOWED_FACING_DIRECTIONS[curr_index-1])
       "ok"
     end
     
     def turn_right
-      raise RobotNotOnTableException.new("Robot not placed on the table yet!") unless already_placed_on_table?
+      raise RobotNotPlaced, "Robot not placed on the table yet!" unless already_placed_on_table?
       curr_index = ALLOWED_FACING_DIRECTIONS.index(@f)
       @f = (curr_index == ALLOWED_FACING_DIRECTIONS.count-1 ? ALLOWED_FACING_DIRECTIONS[0] : ALLOWED_FACING_DIRECTIONS[curr_index+1])
       "ok"
     end
     
     def announce_position
-      raise RobotNotOnTableException.new("Robot not placed on the table yet!") unless already_placed_on_table?
+      raise RobotNotPlaced, "Robot not placed on the table yet!" unless already_placed_on_table?
       "#{@x},#{@y},#{@f}"
     end
     
@@ -69,7 +67,7 @@ module Robogame
       end
       
       def move_to(target_x, target_y)
-        raise InvalidCoordinatesException.new("Out of Boundry movement is not allowed!") unless @table.coordinates_valid?(target_x,target_y)
+        @table.check_coordinates(target_x,target_y)
         @x = target_x
         @y = target_y
         "ok"

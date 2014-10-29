@@ -1,3 +1,5 @@
+require_relative 'errors'
+
 module Robogame
   class Table
     
@@ -10,8 +12,8 @@ module Robogame
       @max_y = max_y
     end
     
-    def coordinates_valid?(x,y)
-      x < @min_x || x > @max_x || y < @min_y || y > @max_y ? false : true
+    def check_coordinates(x,y)
+      raise InvalidCoordinates, "Invalid Coordinates!" if x < @min_x || x > @max_x || y < @min_y || y > @max_y
     end
   end
 end

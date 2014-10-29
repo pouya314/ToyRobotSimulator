@@ -1,9 +1,6 @@
+require_relative 'errors'
 require_relative 'table'
 require_relative 'robot'
-
-require_relative 'empty_command_exception'
-require_relative 'invalid_command_exception'
-require_relative 'wrong_number_of_arguments_for_place_exception'
 
 
 module Robogame
@@ -14,14 +11,14 @@ module Robogame
     end
     
     def execute(command)
-      raise EmptyCommandException.new("The command you provided is empty!") if command.empty?
+      raise EmptyCmd, "The command can not be empty!" if command.empty?
 
       (function, arguments) = command.split(' ',2)
       
       case function
       when "PLACE"
         if arguments.nil? || arguments.empty? || arguments.split(",").size != 3
-          raise WrongNumberOfArgumentsForPlaceException.new("Wrong number of arguments given for PLACE command.")
+          raise InvalidPlaceCmdArgs, "Invalid arguments given for PLACE command."
         end
         
         tokens = arguments.split(",")
@@ -35,7 +32,7 @@ module Robogame
       when "REPORT"
         report
       else
-        raise InvalidCommandException.new("The command you provided is invalid!")
+        raise InvalidCmd, "Invalid Command!"
       end
     end
     
