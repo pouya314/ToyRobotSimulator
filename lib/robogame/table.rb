@@ -1,7 +1,8 @@
-require_relative 'errors'
+require_relative 'table_validations'
 
 module Robogame
   class Table
+    prepend TableValidations
     
     attr_accessor :min_x, :min_y, :max_x, :max_y
     
@@ -13,7 +14,6 @@ module Robogame
     end
     
     def check_coordinates(x,y)
-      raise InvalidCoordinates, "Invalid Coordinates!" if x < @min_x || x > @max_x || y < @min_y || y > @max_y
     end
   end
 end
