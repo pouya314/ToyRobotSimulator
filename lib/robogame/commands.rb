@@ -1,60 +1,30 @@
-require_relative 'errors'
 require_relative 'table'
 require_relative 'robot'
-
+require_relative 'commands_validations'
 
 module Robogame
   class Commands
+    prepend CommandsValidations
+    
     def initialize(table, robot)
       @table = table
       @robot = robot
     end
     
-    def execute(command)
-      raise EmptyCmd, "The command can not be empty!" if command.empty?
-
-      (function, arguments) = command.split(' ',2)
-      
-      case function
+    def execute(func, *args)
+      case func
       when "PLACE"
-        if arguments.nil? || arguments.empty? || arguments.split(",").size != 3
-          raise InvalidPlaceCmdArgs, "Invalid arguments given for PLACE command."
-        end
-        
-        tokens = arguments.split(",")
-        place(tokens[0].to_i, tokens[1].to_i, tokens[2].to_sym)
-      when "MOVE"
-        move
-      when "LEFT"
-        left
-      when "RIGHT"
-        right
-      when "REPORT"
-        report
-      else
-        raise InvalidCmd, "Invalid Command!"
-      end
-    end
-    
-    protected
-      def place(x, y, f)
+        (x,y,f) = *args
         @robot.sit_on_table(@table, x, y, f)
-      end
-    
-      def move
+      when "MOVE"
         @robot.move
-      end
-    
-      def left
+      when "LEFT"
         @robot.turn_left
-      end
-    
-      def right
+      when "RIGHT"
         @robot.turn_right
-      end
-    
-      def report
+      when "REPORT"
         @robot.announce_position
       end
+    end
   end
 end
