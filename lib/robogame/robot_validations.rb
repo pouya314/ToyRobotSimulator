@@ -6,10 +6,15 @@ module RobotValidations
     raise RobotNotPlaced, "Robot not placed on the table yet!" if @table == nil
   end
   
+  def is_integer?(s)
+    /\A[-+]?\d+\z/ === s
+  end
+  
   def sit_on_table(table, x, y, f)
-    table.check_coordinates(x,y)
-    raise InvalidRobotDirection, "Wrong Facing Direction Given for PLACE command." unless ALLOWED_FACING_DIRECTIONS.include?(f)
-    super
+    raise CoordinatesNotInteger, "Coordinates for PLACE command must be of type Integer." unless is_integer?(x) && is_integer?(y)
+    table.check_coordinates(x.to_i, y.to_i)
+    raise InvalidRobotDirection, "Wrong Facing Direction Given for PLACE command." unless ALLOWED_FACING_DIRECTIONS.include?(f.to_sym)
+    super(table, x.to_i, y.to_i, f.to_sym)
   end
   
   def move
