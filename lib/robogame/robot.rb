@@ -1,5 +1,6 @@
 require_relative 'robot_validations'
 require_relative 'config'
+require_relative 'settings'
 
 module Robogame
   class Robot

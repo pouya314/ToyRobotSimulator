@@ -1,5 +1,6 @@
 require_relative 'errors'
 require_relative 'config'
+require_relative 'settings'
 
 module RobotValidations
   def robot_should_be_on_table_already
