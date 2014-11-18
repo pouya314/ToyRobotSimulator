@@ -104,7 +104,7 @@ all `lib/robogame/*_validations.rb` files contain validation code for their resp
 
 Overall flow
 ============
-Todo
+Runner takes input from user and passes it to the instance of Game class. Game initializes all components necessary for game to continue (parser, robot and table) and passes the command (user input) to the parser, which is of a generic type. This generic parser class performs generic validations on the user input first, and then dynamically creates an instance of a more specific command parser (based on the function) and passes on the information to it for further processing. Specific parser object also runs the user input through further validation (specific to that function), and if everything goes well, delegates the task to robot/table objects to be performed. Robot and Table objects also do some validations before taking any action, and eventually return the result. The result/output will be passed all the way back to the runner for display purpose before prompting the user to input the next command. If anything goes wrong during any of the validation procedures, an exception will be raised which will also be shown to the user by runner. And this cycle goes on and on until user enters QUIT command, that causes the app to halt and exit.
 
 Design Decisions:
 =================
