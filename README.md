@@ -106,9 +106,12 @@ Overall flow
 ============
 Runner takes input from user and passes it to the instance of Game class. Game initializes all components necessary for game to continue (parser, robot and table) and passes the command (user input) to the parser, which is of a generic type. This generic parser class performs generic validations on the user input first, and then dynamically creates an instance of a more specific command parser (based on the function) and passes on the information to it for further processing. Specific parser object also runs the user input through further validation (specific to that function), and if everything goes well, delegates the task to robot/table objects to be performed. Robot and Table objects also do some validations before taking any action, and eventually return the result. The result/output will be passed all the way back to the runner for display purpose before prompting the user to input the next command. If anything goes wrong during any of the validation procedures, an exception will be raised which will also be shown to the user by runner. And this cycle goes on and on until user enters QUIT command, that causes the app to halt and exit.
 
-Design Decisions:
+Design Decisions
 =================
-Todo
+#### Decoupling code through an AOP-like approach
+Initially, validation logic was scattered in method definitions. This made me think about ways to weaken such dependencies between domain objects and their validations. I learned about AOP and the idea of evaluating code at/before/after/around a given join-point. Gems such as 'aquarium' provide this functionality. However, later on I realised that ruby >=2 comes with a feature called "prepend" which enables the achievement of pretty much the same thing, but without dependency on external gems (which sometimes can go unmaintained or abandoned for a long time). Of course, one caveat is that it won't work with ruby versions 1.9 or lower, but we should always strive to run the latest and greatest ruby anyway. Here, prepend fits our needs very well because validation is done pre-method-execution. But for things like persistence, logging, notifications, etc we might have to use gems that enable us to do AOP. Anyways, prepend was used to clean up validation code from classes, and put them into their own separate modules. Names of functions in a validation module correspond directly to method names in the class that prepends the module.
+
+#### Polymorphism through duck typing 
 
 LICENSE
 =======
