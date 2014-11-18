@@ -70,9 +70,45 @@ c)
 - REPORT
 - Output: 3,3,NORTH
 
-DESIGN
-======
-TODO
+Code Structure
+==============
+Code is divided into 3 segments/folders: 
+- `bin/` => contains the simple launcher of the app
+- `lib/robogame/` => contains business objects and logic
+- `test/` => contains test cases and suite.
+
+#### Launcher
+`bin/robogam` file is the launcher of the app. It simply causes the application to run, by invoking our runner.
+
+#### Runner
+`lib/robogame/runner.rb` provides a command line interface between the end user and the core of the application logic. It's responsible for taking user input, sending a message to the game object to play based on that input, and finally display the output result or any error that might have occured during execution of the game.
+
+#### Game Simulator
+`lib/robogame/simulator.rb` This module contains the following important components:
+- Game object that plays an orchestrating role. It gets the user input from runner, then creates/initialises the main objects/actors of the game, namely tabletop, robot, and command parser. And finally passes the user input to the parser to begin the process.
+- this module also houses our different types of parsers (for different actions) so introducing a new command (e.g. to fly) is a matter of creating a new class here, and registering it as a new valid command in the settings file.
+- Generic parser is in charge of delegating to sub types/classes that will do parsing of specific commands. (Parsing = validation + required action)
+- Specific command parsers then delegate the job required to be done to robot/table objects that belong to the simulator module.
+
+#### Table & Robot
+`lib/robogame/table.rb` and `lib/robogame/robot.rb` contain definitions for state and behavior of table and robot objects.
+
+#### Validations
+all `lib/robogame/*_validations.rb` files contain validation code for their respective classes.
+
+#### Settings
+`lib/robogame/settings.rb` is where application settings and constants live.
+
+#### Errors
+`lib/robogame/errors.rb` is where we have defined application-specific exceptions.
+
+Overall flow
+============
+Todo
+
+Design Decisions:
+=================
+Todo
 
 LICENSE
 =======
